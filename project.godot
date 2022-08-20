@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "RepeatedLevel",
+"language": "GDScript",
+"path": "res://scripts/repeated_level.gd"
+} ]
+_global_script_class_icons={
+"RepeatedLevel": ""
+}
+
 [application]
 
 config/name="AGJ22"
