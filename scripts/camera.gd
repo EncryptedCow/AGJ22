@@ -16,6 +16,6 @@ func _process(delta: float) -> void:
 			position = player.position - Vector2(0, follow_y_offset)
 		player.CAMERA_MODE.AutoScroll:
 			if Engine.editor_hint:
-				position = Vector2(player.x, )
+				position = Vector2(player.x, player.y - follow_y_offset)
 			else:
 				position.x += scroll_speed * delta
