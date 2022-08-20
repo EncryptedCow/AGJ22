@@ -3,7 +3,7 @@ extends Node2D
 
 export (PackedScene) var level_to_repeat
 export (NodePath) var tracked_object_path
-onready var tracked_object = get_node(tracked_object_path)
+onready var tracked_object = get_node(tracked_object_path).get_node("Node/Camera2D")
 
 func _ready() -> void:
 	

@@ -4,6 +4,9 @@ export (int) var speed = 200
 export (int) var jump_speed = 350
 export (int) var gravity = 800
 
+enum CAMERA_MODE { Follow, AutoScroll }
+export (CAMERA_MODE) var camera_mode = CAMERA_MODE.Follow
+
 var velocity := Vector2.ZERO
 
 func _physics_process(delta: float) -> void:

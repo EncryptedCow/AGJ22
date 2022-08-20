@@ -11,7 +11,6 @@ tracked_object_path = NodePath("Player")
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 257, 576 )
+camera_mode = 1
 
 [node name="CurrentChunk" parent="." instance=ExtResource( 3 )]
-
-[node name="ScrollingCamera" type="Camera2D" parent="."]
