@@ -2,7 +2,8 @@ tool
 extends Node2D
 
 export (PackedScene) var level_to_repeat
-export (NodePath) onready var tracked_object = get_node(tracked_object)
+export (NodePath) var tracked_object_path
+onready var tracked_object = get_node(tracked_object_path)
 
 func _ready() -> void:
 	

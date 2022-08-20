@@ -7,7 +7,7 @@
 [node name="LeftRightLevel" type="Node2D"]
 script = ExtResource( 1 )
 level_to_repeat = ExtResource( 3 )
-tracked_object = NodePath("Player")
+tracked_object_path = NodePath("Player")
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 257, 576 )
