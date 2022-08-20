@@ -11,8 +11,14 @@ config_version=4
 [application]
 
 config/name="AGJ22"
-run/main_scene="res://levels/test_level.tscn"
+run/main_scene="res://levels/Menu.tscn"
 config/icon="res://icon.png"
+
+[debug]
+
+gdscript/warnings/unused_argument=false
+gdscript/warnings/unused_signal=false
+gdscript/warnings/return_value_discarded=false
 
 [gui]
 
