@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://entities/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game_objects/world_tilemap.tscn" type="PackedScene" id=2]
+[ext_resource path="res://game_objects/level_end_trigger.tscn" type="PackedScene" id=3]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="WorldTiles" parent="." instance=ExtResource( 2 )]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+
+[node name="LevelEndTrigger" parent="." instance=ExtResource( 3 )]
