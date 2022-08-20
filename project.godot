@@ -14,6 +14,10 @@ config/name="AGJ22"
 run/main_scene="res://levels/Menu.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Music="*res://scripts/music.gd"
+
 [debug]
 
 gdscript/warnings/unused_argument=false

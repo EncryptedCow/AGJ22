@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/agjMainDRAFT05.mp3-ef79fc696c53de6c3e7952d39a176c2a.mp3str"
+
+[deps]
+
+source_file="res://audio/agjMainDRAFT05.mp3"
+dest_files=[ "res://.import/agjMainDRAFT05.mp3-ef79fc696c53de6c3e7952d39a176c2a.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
