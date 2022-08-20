@@ -9,8 +9,16 @@ script = ExtResource( 1 )
 level_to_repeat = ExtResource( 3 )
 tracked_object_path = NodePath("Player")
 
+[node name="CurrentChunk" parent="." instance=ExtResource( 3 )]
+
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 257, 576 )
+position = Vector2( 224, 576 )
 camera_mode = 1
 
-[node name="CurrentChunk" parent="." instance=ExtResource( 3 )]
+[node name="Camera2D" parent="Player/Node" index="0"]
+position = Vector2( 200, 526 )
+
+[node name="Sprite" parent="Player" index="2"]
+frame = 0
+
+[editable path="Player"]

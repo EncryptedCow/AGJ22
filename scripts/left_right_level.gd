@@ -6,7 +6,6 @@ export (NodePath) var tracked_object_path
 onready var tracked_object = get_node(tracked_object_path).get_node("Node/Camera2D")
 
 func _ready() -> void:
-	
 	if not has_node("CurrentChunk"):
 		var scene_inst = level_to_repeat.instance()
 		scene_inst.name = "CurrentChunk"
