@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
-export (int) var speed = 200
+export (int) var run_speed = 200
+export (int) var walk_speed = 80
 export (int) var jump_speed = 350
 export (int) var gravity = 800
 
@@ -13,11 +14,12 @@ export var anim_override: bool = false
 
 func _physics_process(delta: float) -> void:
 	var movement = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
+	var speed = walk_speed if Flags.has_flag("walking") else run_speed
 	velocity.x = movement * speed
 	velocity.y += gravity * delta
 	
 	velocity = move_and_slide_with_snap(velocity, Vector2.DOWN, Vector2.UP)
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") and Flags.has_flag("can_jump"):
 		if is_on_floor():
 			velocity.y = -jump_speed
 
