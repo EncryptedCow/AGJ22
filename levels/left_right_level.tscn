@@ -1,13 +1,18 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://scripts/level_repeater.gd" type="Script" id=1]
+[ext_resource path="res://scripts/left_right_level.gd" type="Script" id=1]
 [ext_resource path="res://entities/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://levels/repeated_level.tscn" type="PackedScene" id=3]
 
 [node name="LeftRightLevel" type="Node2D"]
-
-[node name="Player" parent="." instance=ExtResource( 2 )]
-
-[node name="LevelRepeater" type="Node2D" parent="."]
 script = ExtResource( 1 )
 level_to_repeat = ExtResource( 3 )
+tracked_object = Object(KinematicBody2D,"_import_path":NodePath(""),"pause_mode":0,"physics_interpolation_mode":0,"unique_name_in_owner":false,"process_priority":0,"visible":true,"modulate":Color( 1, 1, 1, 1 ),"self_modulate":Color( 1, 1, 1, 1 ),"show_behind_parent":false,"light_mask":1,"material":null,"use_parent_material":false,"position":Vector2( 257, 576 ),"rotation":0.0,"scale":Vector2( 1, 1 ),"z_index":0,"z_as_relative":true,"collision_layer":1,"collision_mask":1,"input_pickable":false,"collision/safe_margin":0.08,"motion/sync_to_physics":false,"moving_platform_apply_velocity_on_leave":0,"script":Resource( "res://scripts/player.gd" ),"speed":200,"jump_speed":350,"gravity":800)
+
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 257, 576 )
+
+[node name="CurrentChunk" type="Node2D" parent="." instance=ExtResource( 3 )]
+
+[node name="ScrollingCamera" type="Camera2D" parent="."]
