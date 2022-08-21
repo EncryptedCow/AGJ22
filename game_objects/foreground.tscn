@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=2]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.357143, 0.698413, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0.878431, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 1 )
+width = 512
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0 )
+colors = PoolColorArray( 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 3 )
+width = 512
+
+[node name="Foreground" type="ParallaxBackground"]
+layer = 0
+
+[node name="BlackGradient" type="ParallaxLayer" parent="."]
+z_index = 1
+motion_mirroring = Vector2( 800, 0 )
+
+[node name="Sprite" type="Sprite" parent="BlackGradient"]
+position = Vector2( 0, 1000 )
+rotation = -1.5708
+scale = Vector2( 1, 800 )
+texture = SubResource( 4 )
+
+[node name="FlatBlack" type="ParallaxLayer" parent="."]
+z_index = 2
+motion_mirroring = Vector2( 800, 0 )
+
+[node name="Sprite" type="Sprite" parent="FlatBlack"]
+position = Vector2( 0, 1512 )
+rotation = 1.5708
+scale = Vector2( 1, 800 )
+texture = SubResource( 5 )
