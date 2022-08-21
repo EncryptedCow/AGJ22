@@ -5,6 +5,11 @@ export (int) var walk_speed = 80
 export (int) var jump_speed = 350
 export (int) var gravity = 800
 
+export (Array, AudioStream) var footstep_sounds: Array = []
+var rng := RandomNumberGenerator.new()
+var last_footstep: int = -1
+onready var footstep_player: AudioStreamPlayer = $FootstepAudio
+
 enum CAMERA_MODE { Follow, AutoScroll }
 export (CAMERA_MODE) var camera_mode = CAMERA_MODE.Follow
 
@@ -44,3 +49,12 @@ func _process(delta: float) -> void:
 				animator.play("run")
 		else:
 			animator.play("idle")
+
+func play_footstep():
+	var to_play = rng.randi_range(0, footstep_sounds.size() - 1)
+	while(to_play == last_footstep):
+		to_play = rng.randi_range(0, footstep_sounds.size() - 1)
+	
+	footstep_player.stream = footstep_sounds[to_play]
+	footstep_player.play()
+	last_footstep = to_play

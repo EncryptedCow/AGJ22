@@ -1,10 +1,20 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://entities/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://textures/player/char-spritesheet.png" type="Texture" id=2]
 [ext_resource path="res://scripts/player.gd" type="Script" id=3]
 [ext_resource path="res://scripts/camera.gd" type="Script" id=4]
 [ext_resource path="res://game_objects/background.tscn" type="PackedScene" id=5]
+[ext_resource path="res://audio/footsteps/player_footstep-005.wav" type="AudioStream" id=6]
+[ext_resource path="res://audio/footsteps/player_footstep-006.wav" type="AudioStream" id=7]
+[ext_resource path="res://audio/footsteps/player_footstep-007.wav" type="AudioStream" id=8]
+[ext_resource path="res://audio/footsteps/player_footstep-008.wav" type="AudioStream" id=9]
+[ext_resource path="res://audio/footsteps/player_footstep-009.wav" type="AudioStream" id=10]
+[ext_resource path="res://audio/footsteps/player_footstep-002.wav" type="AudioStream" id=11]
+[ext_resource path="res://audio/footsteps/player_footstep-001.wav" type="AudioStream" id=12]
+[ext_resource path="res://audio/footsteps/player_footstep-003.wav" type="AudioStream" id=13]
+[ext_resource path="res://audio/footsteps/player_footstep-004.wav" type="AudioStream" id=14]
+[ext_resource path="res://game_objects/foreground.tscn" type="PackedScene" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 15 )
@@ -70,8 +80,9 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=5]
 resource_name = "run"
+length = 0.8
 loop = true
-step = 0.0833333
+step = 0.133
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -79,10 +90,27 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.166667, 0.333333, 0.5, 0.666667, 0.833333 ),
+"times": PoolRealArray( 0, 0.133, 0.266, 0.399, 0.532, 0.665 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 12, 13, 14, 15, 16, 17 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.399 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_footstep"
+}, {
+"args": [  ],
+"method": "play_footstep"
+} ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -105,6 +133,7 @@ tracks/0/keys = {
 [node name="Player" instance=ExtResource( 1 )]
 collision_layer = 2
 script = ExtResource( 3 )
+footstep_sounds = [ ExtResource( 12 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ]
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2( 0, -15 )
@@ -123,11 +152,14 @@ y_offset = 30.0
 
 [node name="Background" parent="Node" index="1" instance=ExtResource( 5 )]
 
+[node name="Foreground" parent="Node" index="2" instance=ExtResource( 15 )]
+
 [node name="Sprite" type="Sprite" parent="." index="2"]
 texture = ExtResource( 2 )
 offset = Vector2( 0, -14 )
 hframes = 6
 vframes = 3
+frame = 12
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
 anims/idle = SubResource( 2 )
@@ -135,3 +167,6 @@ anims/jump = SubResource( 4 )
 anims/kick = SubResource( 6 )
 anims/run = SubResource( 5 )
 anims/walk = SubResource( 3 )
+
+[node name="FootstepAudio" type="AudioStreamPlayer" parent="." index="4"]
+volume_db = -15.0
