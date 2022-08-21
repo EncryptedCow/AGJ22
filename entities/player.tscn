@@ -116,6 +116,7 @@ shape = SubResource( 1 )
 position = Vector2( 0, -30 )
 current = true
 zoom = Vector2( 0.5, 0.5 )
+limit_left = 0
 script = ExtResource( 4 )
 player_path = NodePath("../..")
 y_offset = 30.0
