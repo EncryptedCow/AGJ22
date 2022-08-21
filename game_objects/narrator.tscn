@@ -36,4 +36,8 @@ autowrap = true
 
 [node name="Tween" type="Tween" parent="MarginContainer/VBoxContainer/DialogueLabel"]
 
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="tween_completed" from="MarginContainer/VBoxContainer/DialogueLabel/Tween" to="." method="_on_tween_completed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
