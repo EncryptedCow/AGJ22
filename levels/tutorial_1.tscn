@@ -23,6 +23,7 @@ position = Vector2( 149, 512 )
 position = Vector2( 860, 384 )
 scale = Vector2( 3.49755, 14.4802 )
 next_level = ExtResource( 4 )
+play_level_complete_sound = true
 
 [node name="MoveLabel" type="Label" parent="."]
 margin_left = 51.0

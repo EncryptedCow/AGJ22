@@ -28,6 +28,7 @@ position = Vector2( 91, 416 )
 position = Vector2( 1300, 320 )
 scale = Vector2( 2.96, 18.2 )
 next_level = ExtResource( 4 )
+play_level_complete_sound = true
 
 [node name="Bridge" parent="." instance=ExtResource( 8 )]
 position = Vector2( 576, 528 )

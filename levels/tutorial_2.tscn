@@ -34,3 +34,4 @@ position = Vector2( 147, 576 )
 position = Vector2( 1028, 402 )
 scale = Vector2( 2.64, 17.8 )
 next_level = ExtResource( 4 )
+play_level_complete_sound = true
