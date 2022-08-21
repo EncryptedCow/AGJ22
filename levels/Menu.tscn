@@ -23,7 +23,7 @@ margin_bottom = 37.0
 custom_fonts/font = ExtResource( 3 )
 text = "Play"
 
-[node name="Options" type="Button" parent="VBoxContainer"]
+[node name="Credits" type="Button" parent="VBoxContainer"]
 margin_top = 41.0
 margin_right = 117.0
 margin_bottom = 78.0
