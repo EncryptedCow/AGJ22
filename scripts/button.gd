@@ -12,7 +12,7 @@ func _ready() -> void:
 	activate_label.visible = false
 
 func check_show_prompt():
-	if not activated and enabled:
+	if not activated and enabled and not activate_label.visible:
 		activate_label.rect_position = Vector2(-67, -10) + Vector2(rand_range(-20, 20), rand_range(-10, 10))
 		activate_label.rect_rotation = rand_range(-20, 20)
 		activate_label.visible = true
