@@ -13,9 +13,11 @@ var velocity := Vector2.ZERO
 export var anim_override: bool = false
 
 func _physics_process(delta: float) -> void:
-	var movement = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
-	var speed = walk_speed if Flags.has_flag("walking") else run_speed
-	velocity.x = movement * speed
+	if Flags.has_flag("can_move"):
+		var movement = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
+		var speed = walk_speed if Flags.has_flag("walking") else run_speed
+		velocity.x = movement * speed
+	
 	velocity.y += gravity * delta
 	
 	velocity = move_and_slide_with_snap(velocity, Vector2.DOWN, Vector2.UP)

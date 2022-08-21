@@ -4,8 +4,8 @@ extends CanvasLayer
 signal line_complete()
 signal request_next_line()
 
-onready var caption_label: Label = get_node("CenterContainer/MarginContainer/VBoxContainer/Label")
-onready var caption_tween: Tween = get_node("CenterContainer/MarginContainer/VBoxContainer/Label/Tween")
+onready var caption_label: Label = get_node("MarginContainer/VBoxContainer/Label")
+onready var caption_tween: Tween = get_node("MarginContainer/VBoxContainer/Label/Tween")
 
 export var line_time: float = 2.0
 
@@ -28,8 +28,12 @@ func finish_line():
 	if caption_tween.is_active():
 		caption_tween.stop_all()
 		caption_label.percent_visible = 1
+		line_complete = true
+		emit_signal("line_complete")
 	else:
 		emit_signal("request_next_line")
+		if line_complete:
+			caption_label.text = ""
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("skip_dialogue"):

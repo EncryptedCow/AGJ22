@@ -7,24 +7,28 @@
 script = ExtResource( 1 )
 line_time = 1.0
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 0.25
+[node name="SkipLabel" type="Label" parent="."]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 147.0
+margin_bottom = 33.0
+text = "Press F to skip"
 
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer"]
-margin_left = 75.0
-margin_top = 59.0
-margin_right = 725.0
-margin_bottom = 90.0
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+margin_left = 60.0
+margin_top = 20.0
+margin_right = -60.0
+margin_bottom = 80.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MarginContainer"]
-margin_right = 650.0
-margin_bottom = 31.0
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_right = 680.0
+margin_bottom = 60.0
 
-[node name="Label" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer"]
-margin_right = 650.0
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_right = 680.0
 margin_bottom = 31.0
 rect_min_size = Vector2( 650, 0 )
 custom_fonts/font = ExtResource( 2 )
@@ -33,6 +37,6 @@ align = 1
 valign = 1
 autowrap = true
 
-[node name="Tween" type="Tween" parent="CenterContainer/MarginContainer/VBoxContainer/Label"]
+[node name="Tween" type="Tween" parent="MarginContainer/VBoxContainer/Label"]
 
-[connection signal="tween_completed" from="CenterContainer/MarginContainer/VBoxContainer/Label/Tween" to="." method="_on_tween_completed"]
+[connection signal="tween_completed" from="MarginContainer/VBoxContainer/Label/Tween" to="." method="_on_tween_completed"]
