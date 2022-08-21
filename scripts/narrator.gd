@@ -17,6 +17,13 @@ export var auto_next_line: float = 2.0
 var line_complete: bool = false
 
 func say_line(text: String):
+	if caption_tween.is_active():
+		caption_tween.stop_all()
+		caption_label.percent_visible = 1
+		line_complete = true
+		emit_signal("line_complete")
+		_reset_timer()
+	
 	line_complete = false
 	
 	caption_label.percent_visible = 0
@@ -52,6 +59,7 @@ func _input(event: InputEvent) -> void:
 		_finish_cur_line()
 
 func _reset_timer():
+	timer.stop()
 	timer.start(auto_next_line)
 	timer.paused = false
 

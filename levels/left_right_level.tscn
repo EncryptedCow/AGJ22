@@ -1,9 +1,36 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/left_right_level.gd" type="Script" id=1]
 [ext_resource path="res://entities/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://game_objects/narrator.tscn" type="PackedScene" id=3]
+[ext_resource path="res://game_objects/level_end_trigger.tscn" type="PackedScene" id=4]
 [ext_resource path="res://levels/repeated_level_duplicate.tscn" type="PackedScene" id=5]
+[ext_resource path="res://levels/pit_level.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scripts/repeated_level.gd" type="Script" id=7]
+[ext_resource path="res://fonts/Silkscreen_Regular.tres" type="DynamicFont" id=8]
+[ext_resource path="res://textures/arrow.png" type="Texture" id=9]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Label
+
+onready var tween = $Tween
+var forward = true
+
+func _ready() -> void:
+	tween.interpolate_property(self, \"rect_scale\", Vector2(0.9, 0.9), Vector2(1.1, 1.1), 1.0)
+	forward = false
+	tween.start()
+
+func _on_tween_completed(object: Object, key: NodePath) -> void:
+	tween.remove_all()
+	if forward:
+		tween.interpolate_property(self, \"rect_scale\", Vector2(0.9, 0.9), Vector2(1.1, 1.1), 1.0)
+		forward = false
+	else:
+		tween.interpolate_property(self, \"rect_scale\", Vector2(1.1, 1.1), Vector2(0.9, 0.9), 1.0)
+		forward = true
+	tween.start()
+"
 
 [node name="LeftRightLevel" type="Node2D"]
 script = ExtResource( 1 )
@@ -16,4 +43,40 @@ tracked_object_path = NodePath("Player")
 position = Vector2( 210, 572 )
 camera_mode = 1
 
-[node name="CurrentChunk" parent="." instance=ExtResource( 5 )]
+[node name="LevelEndTrigger" parent="." instance=ExtResource( 4 )]
+position = Vector2( -83, 473 )
+scale = Vector2( 5, 20 )
+next_level = ExtResource( 6 )
+
+[node name="Arrows" type="Node2D" parent="."]
+visible = false
+
+[node name="Sprite" type="Sprite" parent="Arrows"]
+position = Vector2( 86, 490 )
+rotation = -0.0896459
+texture = ExtResource( 9 )
+
+[node name="Sprite2" type="Sprite" parent="Arrows"]
+position = Vector2( 292, 448 )
+rotation = 0.161158
+texture = ExtResource( 9 )
+
+[node name="Label" type="Label" parent="Arrows"]
+margin_left = 142.0
+margin_top = 492.0
+margin_right = 356.0
+margin_bottom = 524.0
+rect_rotation = 1.94258
+rect_pivot_offset = Vector2( 107, 16 )
+custom_fonts/font = ExtResource( 8 )
+text = "go get the item"
+script = SubResource( 1 )
+
+[node name="Tween" type="Tween" parent="Arrows/Label"]
+repeat = true
+playback/repeat = true
+
+[node name="CurrentChunk" type="Node2D" parent="." instance=ExtResource( 5 )]
+script = ExtResource( 7 )
+
+[connection signal="tween_completed" from="Arrows/Label/Tween" to="Arrows/Label" method="_on_tween_completed"]

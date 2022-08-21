@@ -8,6 +8,8 @@ onready var parallax = get_parent().get_node("Background")
 export (float) var y_offset = 100.0
 export (float) var scroll_speed = 100.0
 
+var HALF_CAM_WIDTH = (ProjectSettings.get_setting("display/window/size/width") / 2) * 0.5
+
 func _process(delta: float) -> void:
 	if player == null:
 		return
@@ -17,8 +19,8 @@ func _process(delta: float) -> void:
 			position = player.position - Vector2(0, y_offset)
 		player.CAMERA_MODE.AutoScroll:
 			if Engine.editor_hint:
-				var window_width = ProjectSettings.get_setting("display/window/size/width")
-				position = Vector2((window_width / 2) - ((window_width / 2) * zoom.x), player.position.y - y_offset)
-			elif Flags.has_flag("camera_can_scroll"):
-				position.x += scroll_speed * delta
+				position = Vector2(HALF_CAM_WIDTH, player.position.y - y_offset)
+			else:
+				if Flags.has_flag("camera_can_scroll"):
+					position.x += scroll_speed * delta
 				position.y = player.position.y - y_offset
