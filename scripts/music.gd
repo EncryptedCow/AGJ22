@@ -1,5 +1,6 @@
 extends Node
 
+signal glitched_level_complete_finished()
 signal level_complete_finished()
 
 var held_track: AudioStream
@@ -36,10 +37,10 @@ func play_level_complete():
 	audio_stream.stream = level_complete
 	audio_stream.play()
 
-func play_scuffed_level_complete():
+func play_glitched_level_complete():
 	held_track = audio_stream.stream
 	held_playback_position = audio_stream.get_playback_position()
-	audio_stream.stream = level_complete
+	audio_stream.stream = glitched_level_complete
 	audio_stream.play()
 
 func _track_completed():

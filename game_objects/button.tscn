@@ -36,6 +36,3 @@ custom_fonts/font = ExtResource( 3 )
 text = "E to interact"
 align = 1
 valign = 1
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_body_exited"]

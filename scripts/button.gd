@@ -11,17 +11,15 @@ var activated = false
 func _ready() -> void:
 	activate_label.visible = false
 
-func check_show_prompt():
-	if not activated and enabled and not activate_label.visible:
-		activate_label.rect_position = Vector2(-67, -10) + Vector2(rand_range(-20, 20), rand_range(-10, 10))
-		activate_label.rect_rotation = rand_range(-20, 20)
+func _physics_process(delta: float) -> void:
+	if not activated and enabled and trigger_area.get_overlapping_bodies().size() > 0:
 		activate_label.visible = true
+	else:
+		activate_label.visible = false
 
-func _on_body_entered(body: Node) -> void:
-	check_show_prompt()
-
-func _on_body_exited(body: Node) -> void:
-	activate_label.visible = false
+func deactivate():
+	activated = false
+	$ButtonSprite.frame = 0
 
 func _input(event: InputEvent) -> void:
 	if activated:

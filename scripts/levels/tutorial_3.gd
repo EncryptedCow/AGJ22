@@ -21,6 +21,8 @@ func _ready() -> void:
 	_send_next_line()
 	
 	$Bridge.disable()
+	
+	Music.play_intro_normal()
 
 func _send_next_line():
 	if next_line >= lines.size():

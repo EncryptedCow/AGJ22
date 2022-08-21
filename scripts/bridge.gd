@@ -1,9 +1,9 @@
 extends StaticBody2D
 
 func enable():
-	$CollisionShape2D.disabled = false
+	$CollisionShape2D.call_deferred("set_disabled", false)
 	visible = true
 
 func disable():
-	$CollisionShape2D.disabled = true
+	$CollisionShape2D.call_deferred("set_disabled", true)
 	visible = false

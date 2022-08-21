@@ -8,6 +8,7 @@ func _ready() -> void:
 	Music.connect("level_complete_finished", self, "_change_level")
 
 func _on_LevelEndTrigger_body_entered(body: Node) -> void:
+	$CollisionShape2D.disabled = true
 	if play_level_complete_sound:
 		Flags.set_flag("can_move", false)
 		Music.play_level_complete()

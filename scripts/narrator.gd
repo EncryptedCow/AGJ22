@@ -47,8 +47,8 @@ func _finish_cur_line():
 		caption_label.percent_visible = 1
 		line_complete = true
 		emit_signal("line_complete")
-		_reset_timer()
 	else:
+		timer.stop()
 		emit_signal("request_next_line")
 		if line_complete:
 			caption_label.text = ""

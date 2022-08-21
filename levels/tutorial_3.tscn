@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://entities/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game_objects/world_tilemap.tscn" type="PackedScene" id=2]
@@ -7,7 +7,11 @@
 [ext_resource path="res://scripts/levels/tutorial_3.gd" type="Script" id=5]
 [ext_resource path="res://game_objects/narrator.tscn" type="PackedScene" id=6]
 [ext_resource path="res://game_objects/button.tscn" type="PackedScene" id=7]
-[ext_resource path="res://game_objects/bridge.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scripts/bridge.gd" type="Script" id=8]
+[ext_resource path="res://textures/bridge.png" type="Texture" id=9]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 128, 16 )
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 5 )
@@ -30,14 +34,16 @@ scale = Vector2( 2.96, 18.2 )
 next_level = ExtResource( 4 )
 play_level_complete_sound = true
 
-[node name="Bridge" parent="." instance=ExtResource( 8 )]
+[node name="Bridge" type="StaticBody2D" parent="."]
 position = Vector2( 576, 528 )
-scale = Vector2( 8, 1 )
+script = ExtResource( 8 )
 
-[node name="CollisionShape2D" parent="Bridge" index="0"]
-position = Vector2( 7.62939e-06, 0 )
-scale = Vector2( 2, 2 )
+[node name="Sprite" type="Sprite" parent="Bridge"]
+position = Vector2( -2.09808e-05, -1.14441e-05 )
+scale = Vector2( 8, 1 )
+texture = ExtResource( 9 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bridge"]
+shape = SubResource( 1 )
 
 [connection signal="activated" from="Button" to="." method="_on_button_activated"]
-
-[editable path="Bridge"]
