@@ -8,4 +8,5 @@ func _on_play_pressed() -> void:
 
 
 func _on_Credits_pressed() -> void:
-	get_tree().change_scene_to(credits_list)
+	var credits = credits_list.instance()
+	add_child(credits)
