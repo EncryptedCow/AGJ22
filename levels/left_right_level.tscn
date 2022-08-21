@@ -15,10 +15,7 @@ position = Vector2( 224, 576 )
 camera_mode = 1
 
 [node name="Camera2D" parent="Player/Node" index="0"]
-position = Vector2( 200, 526 )
-
-[node name="Sprite" parent="Player" index="2"]
-frame = 0
+position = Vector2( 200, 546 )
 
 [node name="CurrentChunk" type="Node2D" parent="." instance=ExtResource( 3 )]
 script = ExtResource( 4 )
