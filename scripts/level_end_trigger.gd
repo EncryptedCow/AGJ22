@@ -9,10 +9,12 @@ func _ready() -> void:
 
 func _on_LevelEndTrigger_body_entered(body: Node) -> void:
 	if play_level_complete_sound:
+		Flags.set_flag("can_move", false)
 		Music.play_level_complete()
 	else:
 		get_tree().change_scene_to(next_level)
 
 func _change_level():
 	if play_level_complete_sound:
+		Flags.set_flag("can_move", true)
 		get_tree().change_scene_to(next_level)

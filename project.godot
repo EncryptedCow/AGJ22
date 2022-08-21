@@ -40,6 +40,7 @@ Flags="*res://scripts/flags.gd"
 gdscript/warnings/unused_argument=false
 gdscript/warnings/unused_signal=false
 gdscript/warnings/return_value_discarded=false
+shapes/collision/shape_color=Color( 0.701961, 0.47451, 0, 0.419608 )
 
 [display]
 

@@ -15,6 +15,7 @@ var glitched_loop_intro = preload("res://audio/music_mainLoopGLITCHEDINTRO.wav")
 var glitched_loop = preload("res://audio/music_mainLoopGLITCHED.wav")
 
 var level_complete = preload("res://audio/music_levelComplete.wav")
+var glitched_level_complete = preload("res://audio/music_levelCompleteGLITCHED.wav")
 
 func _ready() -> void:
 	audio_stream = music_player_scene.instance()
@@ -36,7 +37,10 @@ func play_level_complete():
 	audio_stream.play()
 
 func play_scuffed_level_complete():
-	pass
+	held_track = audio_stream.stream
+	held_playback_position = audio_stream.get_playback_position()
+	audio_stream.stream = level_complete
+	audio_stream.play()
 
 func _track_completed():
 	match audio_stream.stream:
@@ -55,3 +59,8 @@ func _track_completed():
 			audio_stream.seek(held_playback_position)
 			audio_stream.play()
 			emit_signal("level_complete_finished")
+		glitched_level_complete:
+			audio_stream.stream = held_track
+			audio_stream.seek(held_playback_position)
+			audio_stream.play()
+			emit_signal("glitched_level_complete_finished")
