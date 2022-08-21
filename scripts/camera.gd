@@ -3,6 +3,7 @@ extends Camera2D
 
 export (NodePath) var player_path
 onready var player = get_node(player_path)
+onready var parallax = get_parent().get_node("Background")
 
 export (float) var y_offset = 100.0
 export (float) var scroll_speed = 100.0
