@@ -65,6 +65,8 @@ func _ready() -> void:
 	$Button.enabled = false
 	$Button.visible = false
 	$Bridge.disable()
+	
+	Music.play_intro_normal()
 
 func _send_next_line():
 	if next_line >= lines_in_use.size():
@@ -95,7 +97,9 @@ func _glitched_level_complete_finished():
 
 func _on_pit_entered(body: Node) -> void:
 	pit_entered_count += 1
-	$Player.position = player_spawn.position
+	
+	if pit_entered_count < 4:
+		$Player.position = player_spawn.position
 	
 	match pit_entered_count:
 		1:
@@ -112,15 +116,21 @@ func _on_pit_entered(body: Node) -> void:
 			$Bridge.enable()
 			$Player.position = $ButtonLocation.position
 			var puppy = preload("res://game_objects/puppy.tscn").instance()
-			puppy.position = $Button.position
+			puppy.position = $PuppySpawn.position
 			puppy.connect("puppy_kicked", self, "_on_puppy_kicked")
 			add_child(puppy)
 			Flags.set_flag("can_move", false)
 		4:
-			get_tree().change_scene_to(preload("res://levels/boss_level.tscn"))
+			Flags.set_flag("can_move", false)
+			Music.connect("subversion_one_complete", self, "_subversion_one_complete")
+			Music.play_subversion_one()
 	
 	next_line = 0
 	_send_next_line()
+
+func _subversion_one_complete():
+	Flags.set_flag("can_move", true)
+	get_tree().change_scene_to(preload("res://levels/boss_level.tscn"))
 
 func _on_button_activated() -> void:
 	$Bridge.disable()

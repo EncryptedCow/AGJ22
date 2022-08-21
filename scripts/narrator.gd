@@ -4,6 +4,7 @@ extends CanvasLayer
 signal line_complete()
 signal request_next_line()
 
+
 onready var caption_label: Label = $MarginContainer/VBoxContainer/DialogueLabel
 onready var caption_tween: Tween = $MarginContainer/VBoxContainer/DialogueLabel/Tween
 
@@ -11,8 +12,10 @@ onready var skip_label: Label = $MarginContainer/VBoxContainer/SkipLabel
 
 onready var timer: Timer = $Timer
 
-export var line_time: float = 2.0
-export var auto_next_line: float = 2.0
+export var line_time: float = 1.0
+export var auto_skip_curve: Curve = Curve.new()
+export var auto_skip_line_size: int = 150
+export var auto_next_line: float = 10.0
 
 var line_complete: bool = false
 
@@ -46,6 +49,7 @@ func _finish_cur_line():
 		caption_tween.stop_all()
 		caption_label.percent_visible = 1
 		line_complete = true
+		_reset_timer()
 		emit_signal("line_complete")
 	else:
 		timer.stop()
@@ -60,7 +64,9 @@ func _input(event: InputEvent) -> void:
 
 func _reset_timer():
 	timer.stop()
-	timer.start(auto_next_line)
+	var auto_skip_scale = auto_skip_curve.interpolate(caption_label.text.length() / auto_skip_line_size)
+	print("auto skip time: %s" % (auto_next_line * auto_skip_scale))
+	timer.start(auto_next_line * auto_skip_scale)
 	timer.paused = false
 
 func _on_timer_timeout() -> void:

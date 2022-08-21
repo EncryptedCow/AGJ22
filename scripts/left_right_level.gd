@@ -63,6 +63,12 @@ var checkpoint_lines = [
 	"Look at you go! You’re going to love this item. Seriously."
 ]
 
+var left_early_lines = [
+	"Wait what? Where did you get off to?",
+	"Wait a second you can’t go back there!"
+]
+
+var hit_level_end = false
 var completed_big_ass_dialogue = false
 var line_end_x: float = 100000000
 
@@ -86,6 +92,8 @@ func _ready() -> void:
 	narrator.connect("line_complete", self, "_line_complete")
 	narrator.connect("request_next_line", self, "_line_requested")
 	
+	Music.play_intro_normal()
+	
 	if not Engine.editor_hint:
 		chunk_width = scene_inst.get_chunk_width() * 32
 		_create_next_chunk()
@@ -95,11 +103,17 @@ func _ready() -> void:
 		_send_next_line()
 
 func _send_next_line():
-	if not completed_big_ass_dialogue:
+	if not completed_big_ass_dialogue and not hit_level_end:
 		if next_line >= lines.size():
 			return
 		
 		narrator.say_line(lines[next_line])
+		next_line += 1
+	if hit_level_end:
+		if next_line >= left_early_lines.size():
+			return
+		
+		narrator.say_line(left_early_lines[next_line])
 		next_line += 1
 
 func _line_requested():
@@ -131,7 +145,7 @@ func _process(_delta: float) -> void:
 		_delete_prev_chunk()
 	
 	if Flags.has_flag("camera_can_scroll"):
-		end_trigger.position.x = tracked_object.position.x - HALF_CAM_WIDTH - (32 * 2.5)
+		end_trigger.position.x = tracked_object.position.x - HALF_CAM_WIDTH - (32 * 2.5) - 32
 	
 	if completed_big_ass_dialogue and tracked_object.position.x > line_end_x + 500:
 		line_end_x = tracked_object.position.x
@@ -156,3 +170,19 @@ func _delete_prev_chunk():
 	
 	get_node("PreviousChunk").queue_free()
 	remove_child(get_node("PreviousChunk"))
+
+func _on_left_trigger_entered(body: Node) -> void:
+	if not Flags.has_flag("camera_can_scroll"):
+		return
+	hit_level_end = true
+	next_line = 0
+	_send_next_line()
+	Music.connect("subversion_clean_complete", self, "_subversion_clean_complete")
+	Flags.set_flag("camera_can_scroll", false)
+	Flags.set_flag("can_move", false)
+	$LevelEndTrigger/CollisionShape2D.call_deferred("set_disabled", true)
+	Music.play_subversion_clean()
+
+func _subversion_clean_complete():
+	Flags.set_flag("can_move", true)
+	get_tree().change_scene_to(preload("res://levels/pit_level.tscn"))

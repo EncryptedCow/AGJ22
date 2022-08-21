@@ -5,31 +5,31 @@
 [ext_resource path="res://scripts/puppy.gd" type="Script" id=3]
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 12.0
+radius = 8.0
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 66, 45 )
+extents = Vector2( 26.5, 21 )
 
 [node name="Puppy" type="RigidBody2D"]
 collision_layer = 0
+collision_mask = 0
 mode = 1
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -1, -14 )
+position = Vector2( 0, -9 )
 shape = SubResource( 2 )
 
 [node name="DogSprite" type="Sprite" parent="."]
-position = Vector2( 0, -23 )
-scale = Vector2( 2, 2 )
+position = Vector2( 0, -13 )
 texture = ExtResource( 1 )
 hframes = 3
 
 [node name="ActionLabel" type="Label" parent="."]
-margin_left = -184.0
-margin_top = -145.0
-margin_right = 191.0
-margin_bottom = -80.0
+margin_left = -183.0
+margin_top = -104.0
+margin_right = 192.0
+margin_bottom = -39.0
 custom_fonts/font = ExtResource( 2 )
 text = "Press E to
 kick the puppy"
@@ -40,5 +40,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 0, -46 )
+position = Vector2( -3.5, -21 )
 shape = SubResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

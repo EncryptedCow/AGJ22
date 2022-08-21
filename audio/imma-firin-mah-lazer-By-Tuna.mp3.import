@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/imma-firin-mah-lazer-By-Tuna.mp3-224abaad58a42bfd1ada8e4fa2b1dafa.mp3str"
+
+[deps]
+
+source_file="res://audio/imma-firin-mah-lazer-By-Tuna.mp3"
+dest_files=[ "res://.import/imma-firin-mah-lazer-By-Tuna.mp3-224abaad58a42bfd1ada8e4fa2b1dafa.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

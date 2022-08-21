@@ -1,19 +1,100 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://textures/dino-spritesheet.png" type="Texture" id=1]
+[ext_resource path="res://scripts/boss.gd" type="Script" id=2]
+[ext_resource path="res://fonts/Silkscreen_Regular.tres" type="DynamicFont" id=3]
+[ext_resource path="res://fonts/Silkscreen_HalfSize.tres" type="DynamicFont" id=4]
+[ext_resource path="res://audio/roars/dino_rawrXD-002.wav" type="AudioStream" id=5]
+[ext_resource path="res://audio/roars/dino_rawrXD-003.wav" type="AudioStream" id=6]
+[ext_resource path="res://audio/roars/dino_rawrXD-001.wav" type="AudioStream" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 42.5, 31 )
+extents = Vector2( 68, 31 )
 
-[node name="Boss" type="KinematicBody2D"]
+[node name="Boss" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 2 )
+roar_sounds = [ ExtResource( 7 ), ExtResource( 5 ), ExtResource( 6 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
-offset = Vector2( 0, -30 )
+offset = Vector2( -14, -30 )
 vframes = 2
 frame = 1
 
+[node name="RayCast2D" type="RayCast2D" parent="Sprite"]
+position = Vector2( -42, -33 )
+enabled = true
+cast_to = Vector2( -120, 37 )
+collide_with_areas = true
+
+[node name="AttackSpawn" type="Position2D" parent="."]
+position = Vector2( -42, -33 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2( -3.5, -31 )
+position = Vector2( 0, -31 )
 shape = SubResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="TalkPrompt" type="Label" parent="."]
+margin_left = -110.0
+margin_top = -92.0
+margin_right = 113.0
+margin_bottom = -61.0
+custom_fonts/font = ExtResource( 3 )
+text = "press e to talk"
+
+[node name="Dialogue" type="Label" parent="."]
+margin_left = -170.0
+margin_top = -151.0
+margin_right = 166.0
+margin_bottom = -74.0
+custom_fonts/font = ExtResource( 4 )
+text = "....?"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="DialogueButtons" type="Node2D" parent="."]
+position = Vector2( 0, -31 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="Option1" type="Button" parent="DialogueButtons"]
+margin_left = 12.0
+margin_top = -85.0
+margin_right = 104.0
+margin_bottom = -65.0
+text = "Friend, help."
+
+[node name="Option2" type="Button" parent="DialogueButtons"]
+margin_left = -108.0
+margin_top = -85.0
+margin_right = -14.0
+margin_bottom = -65.0
+text = "Friend, help?"
+
+[node name="DialogueTimer" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+
+[node name="DinoRoar" type="AudioStreamPlayer" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 5
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+color = Color( 0, 0, 0, 0 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="pressed" from="DialogueButtons/Option1" to="." method="_advance_dialogue"]
+[connection signal="pressed" from="DialogueButtons/Option2" to="." method="_advance_dialogue"]
+[connection signal="tween_completed" from="Tween" to="." method="_on_tween_completed"]

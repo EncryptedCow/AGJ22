@@ -133,6 +133,7 @@ tracks/0/keys = {
 [node name="Player" instance=ExtResource( 1 )]
 collision_layer = 2
 script = ExtResource( 3 )
+run_speed = 175
 footstep_sounds = [ ExtResource( 12 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ]
 
 [node name="CollisionShape2D" parent="." index="0"]
