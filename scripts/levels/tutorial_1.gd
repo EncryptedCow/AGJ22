@@ -15,13 +15,9 @@ onready var narrator: Narrator = $Narrator
 onready var timer: Timer = $Timer
 
 func _ready() -> void:
-	narrator.connect("line_complete", self, "_line_complete")
+	narrator.connect("request_next_line", self, "_line_requested")
 	timer.autostart = true
 	_send_next_line()
-
-func _line_complete():
-	print("line complete")
-	timer.start(2.0)
 
 func _send_next_line():
 	if next_line >= lines.size():
@@ -29,3 +25,6 @@ func _send_next_line():
 	
 	narrator.say_line(lines[next_line])
 	next_line += 1
+
+func _line_requested():
+	_send_next_line()
