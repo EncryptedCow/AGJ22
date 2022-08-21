@@ -17,7 +17,6 @@ onready var timer: Timer = $Timer
 func _ready() -> void:
 	narrator.connect("line_complete", self, "_line_complete")
 	narrator.connect("request_next_line", self, "_line_requested")
-	timer.autostart = true
 	_send_next_line()
 
 func _send_next_line():
