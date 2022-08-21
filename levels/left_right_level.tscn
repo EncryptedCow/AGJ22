@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/left_right_level.gd" type="Script" id=1]
+[ext_resource path="res://entities/player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://levels/repeated_level.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scripts/repeated_level.gd" type="Script" id=4]
+
+[node name="LeftRightLevel" type="Node2D"]
+script = ExtResource( 1 )
+level_to_repeat = ExtResource( 3 )
+tracked_object_path = NodePath("Player")
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 224, 576 )
+camera_mode = 1
+
+[node name="Camera2D" parent="Player/Node" index="0"]
+position = Vector2( 200, 526 )
+
+[node name="Sprite" parent="Player" index="2"]
+frame = 0
+
+[node name="CurrentChunk" type="Node2D" parent="." instance=ExtResource( 3 )]
+script = ExtResource( 4 )
+
+[editable path="Player"]

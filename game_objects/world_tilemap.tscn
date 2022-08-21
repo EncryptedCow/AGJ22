@@ -2,9 +2,7 @@
 
 [ext_resource path="res://textures/world_tiles.tres" type="TileSet" id=1]
 
-[node name="Level" type="Node2D"]
-
-[node name="Tilemap" type="TileMap" parent="."]
+[node name="WorldTiles" type="TileMap"]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 format = 1

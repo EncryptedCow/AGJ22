@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/collision_tiles.png-12af7ce20a2d36e1f90152d6036d63f0.stex"
+path="res://.import/boss.png-e685fdcc4a5b295dc1233ada775f89e5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/collision_tiles.png"
-dest_files=[ "res://.import/collision_tiles.png-12af7ce20a2d36e1f90152d6036d63f0.stex" ]
+source_file="res://textures/boss.png"
+dest_files=[ "res://.import/boss.png-e685fdcc4a5b295dc1233ada775f89e5.stex" ]
 
 [params]
 
