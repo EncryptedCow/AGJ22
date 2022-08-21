@@ -1,8 +1,6 @@
 extends Node
 
-var _flags: Dictionary = {
-	"can_jump": true
-}
+var _flags: Dictionary = {}
 
 func set_flag(name: String, val: bool):
 	_flags[name] = val
