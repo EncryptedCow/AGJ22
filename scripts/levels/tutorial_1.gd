@@ -12,7 +12,6 @@ var lines: Array = [
 var next_line: int = 0
 
 onready var narrator: Narrator = $Narrator
-onready var timer: Timer = $Timer
 
 func _ready() -> void:
 	narrator.connect("line_complete", self, "_line_complete")
