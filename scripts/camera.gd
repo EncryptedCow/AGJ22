@@ -19,6 +19,6 @@ func _process(delta: float) -> void:
 			if Engine.editor_hint:
 				var window_width = ProjectSettings.get_setting("display/window/size/width")
 				position = Vector2((window_width / 2) - ((window_width / 2) * zoom.x), player.position.y - y_offset)
-			else:
+			elif Flags.has_flag("camera_can_scroll"):
 				position.x += scroll_speed * delta
 				position.y = player.position.y - y_offset

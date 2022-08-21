@@ -11,7 +11,23 @@ var next_chunk: Node2D
 
 var HALF_CAM_WIDTH = (ProjectSettings.get_setting("display/window/size/width") / 2) * 0.5
 
+var lines: Array = [
+	"Lesson one: Expectations",
+	"This is a question asked by designers and programmers the world round!",
+	"Everyone wants to know how to design good and proper video games, but new makers often don’t know where to begin.",
+	"In this 250 part series of lessons, we will show you the ins and outs of good and proper game design.",
+	"…starting from the humblest of beginnings…",
+	"...the creation and fulfillment of expectations."
+]
+
+var next_line: int = 0
+
+onready var narrator: Narrator = $Narrator
+
 func _ready() -> void:
+	Flags.set_flag("can_move", true)
+	Flags.set_flag("can_jump", true)
+	
 	if has_node("CurrentChunk"):
 		get_node("CurrentChunk").queue_free()
 		remove_child(get_node("CurrentChunk"))
@@ -41,7 +57,6 @@ func _process(_delta: float) -> void:
 	
 	if tracked_object.position.x > current_chunk.position.x + HALF_CAM_WIDTH:
 		_delete_prev_chunk()
-	
 
 func _create_next_chunk():
 	if has_node("NextChunk"):
