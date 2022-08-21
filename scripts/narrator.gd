@@ -4,8 +4,10 @@ extends CanvasLayer
 signal line_complete()
 signal request_next_line()
 
-onready var caption_label: Label = get_node("MarginContainer/VBoxContainer/Label")
-onready var caption_tween: Tween = get_node("MarginContainer/VBoxContainer/Label/Tween")
+onready var caption_label: Label = get_node("MarginContainer/VBoxContainer/DialogueLabel")
+onready var caption_tween: Tween = get_node("MarginContainer/VBoxContainer/DialogueLabel/Tween")
+
+onready var skip_label: Label = get_node("MarginContainer/VBoxContainer/SkipLabel")
 
 export var line_time: float = 2.0
 
@@ -19,6 +21,8 @@ func say_line(text: String):
 	
 	caption_tween.interpolate_property(caption_label, "percent_visible", 0, 1, line_time,Tween.TRANS_LINEAR)
 	caption_tween.start()
+	
+	skip_label.visible = true
 
 func _on_tween_completed(object: Object, key: NodePath) -> void:
 	line_complete = true
@@ -34,6 +38,7 @@ func finish_line():
 		emit_signal("request_next_line")
 		if line_complete:
 			caption_label.text = ""
+			skip_label.visible = false
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("skip_dialogue"):
