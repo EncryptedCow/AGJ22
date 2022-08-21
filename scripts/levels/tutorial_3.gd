@@ -37,7 +37,7 @@ func _line_requested():
 func _line_complete():
 	if next_line == 5:
 		$Button.enabled = true
-		$Button.check_show_prompt()
+f		$Button.check_show_prompt()
 
 func _on_button_activated() -> void:
 	$Bridge.enable()

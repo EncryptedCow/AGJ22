@@ -1,11 +1,23 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://fonts/Silkscreen_Regular.tres" type="DynamicFont" id=1]
 [ext_resource path="res://fonts/Silkscreen_HalfSize.tres" type="DynamicFont" id=2]
+[ext_resource path="res://scripts/Credits.gd" type="Script" id=3]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+
+[node name="Credits" type="Label" parent="."]
+margin_left = 349.0
+margin_top = 103.0
+margin_right = 447.0
+margin_bottom = 130.0
+rect_min_size = Vector2( 125, 25.041 )
+rect_pivot_offset = Vector2( 0, 3.607 )
+custom_fonts/font = ExtResource( 1 )
+text = "Credits
+"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.158
@@ -15,13 +27,14 @@ margin_top = 302.0
 margin_right = -526.4
 margin_bottom = -350.2
 
-[node name="Button" type="Button" parent="."]
+[node name="SkipButton" type="Button" parent="."]
 margin_left = 639.0
 margin_top = 488.0
 margin_right = 741.0
 margin_bottom = 537.0
 custom_fonts/font = ExtResource( 1 )
 text = "Skip"
+script = ExtResource( 3 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 331.0
@@ -29,19 +42,9 @@ margin_top = 195.0
 margin_right = 475.0
 margin_bottom = 405.0
 
-[node name="Credits" type="Label" parent="VBoxContainer"]
-margin_right = 144.0
-margin_bottom = 65.0
-rect_min_size = Vector2( 125, 25.041 )
-rect_pivot_offset = Vector2( 0, 3.607 )
-custom_fonts/font = ExtResource( 1 )
-text = "Credits
-"
-
 [node name="Label" type="Label" parent="VBoxContainer"]
-margin_top = 69.0
 margin_right = 144.0
-margin_bottom = 210.0
+margin_bottom = 141.0
 custom_fonts/font = ExtResource( 2 )
 text = "Encryptedcow
 Alex00
@@ -56,3 +59,5 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 3.0
 margin_right = 3.0
+
+[connection signal="pressed" from="SkipButton" to="SkipButton" method="on_SkipButton_pressed"]
