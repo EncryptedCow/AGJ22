@@ -39,6 +39,9 @@ func _ready() -> void:
 	audio_stream.connect("finished", self, "_track_completed")
 	add_child(audio_stream)
 
+func stop_track():
+	audio_stream.stop()
+
 func play_intro_normal():
 	if audio_stream.stream == main_loop or audio_stream.stream == main_loop_intro:
 		return

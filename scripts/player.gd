@@ -10,6 +10,8 @@ var rng := RandomNumberGenerator.new()
 var last_footstep: int = -1
 onready var footstep_player: AudioStreamPlayer = $FootstepAudio
 
+export (Array, AudioStream) var jump_sounds = []
+
 enum CAMERA_MODE { Follow, AutoScroll }
 export (CAMERA_MODE) var camera_mode = CAMERA_MODE.Follow
 
@@ -30,6 +32,8 @@ func _physics_process(delta: float) -> void:
 	velocity = move_and_slide_with_snap(velocity, Vector2.DOWN, Vector2.UP)
 	if Input.is_action_just_pressed("jump") and Flags.has_flag("can_jump"):
 		if is_on_floor():
+			$JumpAudio.stream = jump_sounds[randi() % jump_sounds.size()]
+			$JumpAudio.play()
 			velocity.y = -jump_speed
 
 func _process(delta: float) -> void:

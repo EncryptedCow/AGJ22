@@ -7,6 +7,7 @@ func _ready() -> void:
 	narrator.connect("line_complete", self, "_line_complete")
 	narrator.connect("request_next_line", self, "_line_requested")
 	_send_next_line()
+	Music.stop_track()
 	
 	$GlitchBlocks/GlitchedRock5/AudioStreamPlayer.connect("finished", self, "_break_tile")
 

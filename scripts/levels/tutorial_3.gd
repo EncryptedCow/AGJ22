@@ -40,3 +40,7 @@ func _line_complete():
 
 func _on_button_activated() -> void:
 	$Bridge.enable()
+
+func _on_LevelReset_body_entered(body: Node) -> void:
+	$Player.position = $PlayerRespawn.position
+	$AudioStreamPlayer.play()

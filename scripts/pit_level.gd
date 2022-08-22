@@ -66,7 +66,7 @@ func _ready() -> void:
 	$Button.visible = false
 	$Bridge.disable()
 	
-	Music.play_intro_normal()
+	Music.play_intro_glitched()
 
 func _send_next_line():
 	if next_line >= lines_in_use.size():
